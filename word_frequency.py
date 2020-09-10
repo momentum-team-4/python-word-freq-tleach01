@@ -4,7 +4,7 @@ STOP_WORDS = [
     'will', 'with'
 ]
 
-text = open('one-today.txt', 'r')
+text = open('praise_song_for_the_day.txt', 'r')
 
 d = dict()
 
@@ -20,7 +20,7 @@ for line in text:
             d[word] = 1
 for key in list(d.keys()):
     print(key, ":", d[key])
-    
+
 
 def print_word_freq(file):
     """Read in `file` and print out the frequency of words in that file."""
