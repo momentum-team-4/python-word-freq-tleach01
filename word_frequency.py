@@ -4,27 +4,35 @@ STOP_WORDS = [
     'will', 'with'
 ]
 
-text = open('praise_song_for_the_day.txt', 'r')
-
-d = dict()
-
-for line in text:
-    line = line.strip()
-    line = line.lower()
-    words = line.split(" ")
-
-    for word in words:
-        if word in d:
-            d[word] = d[word] + 1
-        else:
-            d[word] = 1
-for key in list(d.keys()):
-    print(key, ":", d[key])
-
-
 def print_word_freq(file):
     """Read in `file` and print out the frequency of words in that file."""
-    
+    with open(file, 'r') as praise:
+        poem = praise.read()
+
+    fileWords = poem.lower().replace('-', " ").replace(":", '').replace(",", " ").replace(".", " ").replace("/n", " ").replace('"', " ").split()
+
+# for line in text:
+#     line = line.strip()
+#     line = line.lower()
+#     words = line.split(" ")
+
+    counted = []
+
+    for word in fileWords:
+        if word not in STOP_WORDS:
+            counted.append(word)
+
+    d = {}
+
+    for word in counted:
+            if word not in d.keys():
+                d[word] = 1
+            else:
+                d[word] += 1
+
+    d_filtered = sorted(d, key=d.get, reverse=True)
+    for num in d_filtered:
+        print(num, '|', d[num], '*' * d[num])
 
 
 if __name__ == "__main__":
